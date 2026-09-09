@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OTX ELIXIR</title>
     <meta name="theme-color" content="#0c0a09" />
-    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -237,7 +237,6 @@
         border-radius: 50%;
         border: 1px solid var(--gold-soft);
         opacity: 0.45;
-        animation: spin 26s linear infinite;
       }
       .logo-ring.ring-2 {
         inset: -28px;
@@ -350,11 +349,6 @@
         to {
           opacity: 1;
           transform: translateY(0);
-        }
-      }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
         }
       }
       @keyframes shine {
@@ -579,7 +573,7 @@
         font-weight: 735;
         font-size: 1.2rem;
         color: var(--gold);
-        margin-top: 10px;
+        margin-top: auto;
         unicode-bidi: plaintext;
       }
 
@@ -801,6 +795,7 @@
           <img
             src="assets/logo.png"
             alt="OTX ELIXIR Logo"
+            draggable="false"
             class="hero-logo-main"
           />
         </div>
