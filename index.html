@@ -46,7 +46,7 @@
         --radius-s: 8px;
         --radius-m: 14px;
         --radius-l: 26px;
-        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --ease: cubic-bezier(0.2, 0.9, 0.2, 1);
       }
 
       html[data-theme="dark"] {
@@ -136,11 +136,11 @@
           background 0.3s var(--ease);
       }
       .theme-toggle:hover {
-        transform: translateY(-2px) rotate(12deg);
+        transform: scale(1.1);
         border-color: var(--gold);
       }
       .theme-toggle:active {
-        transform: scale(0.92);
+        transform: scale(0.95);
       }
       .theme-toggle i {
         pointer-events: none;
@@ -318,6 +318,7 @@
         box-shadow: 0 8px 24px var(--glow);
         opacity: 0;
         animation: rise 1s var(--ease) 0.6s forwards;
+        user-select: none;
       }
       .btn-cta::after {
         content: "";
@@ -489,6 +490,7 @@
         position: relative;
         background: linear-gradient(135deg, var(--bg-soft), var(--bg));
         overflow: hidden;
+        cursor: pointer;
       }
       .card-banner img {
         width: 100%;
@@ -510,9 +512,42 @@
         );
         opacity: 0;
         transition: opacity 0.25s var(--ease);
+        pointer-events: none;
       }
       .perfume-card:hover .card-banner::after {
         opacity: 1;
+      }
+
+      .expand-btn {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 10;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: color-mix(in srgb, var(--bg) 75%, transparent);
+        backdrop-filter: blur(8px);
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 12px var(--shadow);
+        transition:
+          transform 0.2s var(--ease),
+          border-color 0.2s var(--ease),
+          background 0.2s var(--ease);
+      }
+      .expand-btn:hover {
+        transform: scale(1.1);
+        border-color: var(--gold);
+        background: var(--bg);
+      }
+      .expand-btn:active {
+        transform: scale(0.92);
       }
 
       .card-body {
@@ -528,6 +563,7 @@
         font-weight: 735;
         font-size: 1.28rem;
         color: var(--ink);
+        unicode-bidi: plaintext;
       }
       .card-subtitle {
         font-family: "Alexandria", sans-serif;
@@ -535,6 +571,7 @@
         font-weight: 335;
         font-size: 0.85rem;
         color: var(--sub);
+        unicode-bidi: plaintext;
       }
       .card-price {
         font-family: "Alexandria", sans-serif;
@@ -543,6 +580,7 @@
         font-size: 1.2rem;
         color: var(--gold);
         margin-top: 10px;
+        unicode-bidi: plaintext;
       }
 
       .card-action-btn {
@@ -566,6 +604,7 @@
         transition:
           background 0.2s var(--ease),
           transform 0.2s var(--ease);
+        user-select: none;
       }
       .card-action-btn:hover {
         background: var(--whatsapp-hover);
@@ -580,6 +619,82 @@
         text-align: center;
         color: var(--sub);
         padding: 30px;
+      }
+
+      /* ======================================================
+         LIGHTBOX & MORPH TRANSITION
+      ====================================================== */
+      .lightbox-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+        pointer-events: none;
+        transition:
+          background 0.35s var(--ease),
+          backdrop-filter 0.35s var(--ease);
+      }
+      .lightbox-overlay.active {
+        background: rgba(0, 0, 0, 0.88);
+        backdrop-filter: blur(14px);
+        pointer-events: auto;
+      }
+
+      .morph-img {
+        position: fixed;
+        z-index: 2001;
+        object-fit: cover;
+        border-radius: var(--radius-m);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        border: 1px solid var(--line);
+        transition:
+          transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+          width 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+          height 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+          border-radius 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+        cursor: pointer;
+        will-change: transform, width, height;
+        transform-origin: top left;
+      }
+      .morph-img.expanded {
+        object-fit: contain;
+        pointer-events: auto;
+      }
+
+      .lightbox-close {
+        position: fixed;
+        top: 22px;
+        right: 22px;
+        z-index: 2002;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: rgba(20, 20, 20, 0.6);
+        color: var(--gold);
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.8);
+        transition:
+          transform 0.3s var(--ease),
+          opacity 0.3s var(--ease),
+          background 0.2s var(--ease);
+      }
+      .lightbox-close.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+      }
+      .lightbox-close:hover {
+        transform: scale(1.1);
+        background: rgba(40, 40, 40, 0.8);
       }
 
       /* ======================================================
@@ -645,7 +760,9 @@
       /* Accessibility */
       a:focus-visible,
       .theme-toggle:focus-visible,
-      .btn-cta:focus-visible {
+      .btn-cta:focus-visible,
+      .expand-btn:focus-visible,
+      .lightbox-close:focus-visible {
         outline: 2px solid var(--gold);
         outline-offset: 3px;
       }
@@ -761,6 +878,12 @@
       <p class="copyright">© OTX ELIXIR. جميع الحقوق محفوظة</p>
     </footer>
 
+    <!-- Lightbox Overlay & Controls -->
+    <div class="lightbox-overlay" id="lightboxOverlay"></div>
+    <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
     <!-- Loads products text string -->
     <script src="products/products.js"></script>
     <script>
@@ -782,6 +905,122 @@
           localStorage.setItem("otx-theme", next);
         });
       })();
+
+      /* ---------- Morph Lightbox Animation ---------- */
+      const overlay = document.getElementById("lightboxOverlay");
+      const closeBtn = document.getElementById("lightboxClose");
+      let activeTargetImg = null;
+      let morphImg = null;
+      let isAnimating = false;
+
+      function openMorphLightbox(triggerEl) {
+        if (isAnimating || morphImg) return;
+        isAnimating = true;
+
+        const banner = triggerEl.closest(".card-banner");
+        const img = banner.querySelector("img");
+        activeTargetImg = img;
+
+        const rect = img.getBoundingClientRect();
+
+        // Lock document scroll & prevent layout shift (compensate scrollbar width)
+        const scrollbarWidth =
+          window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.paddingRight = scrollbarWidth + "px";
+        document.body.style.overflow = "hidden";
+
+        // Create temporary clone for morphing
+        morphImg = document.createElement("img");
+        morphImg.src = img.src;
+        morphImg.alt = img.alt;
+        morphImg.className = "morph-img";
+        morphImg.style.top = "0px";
+        morphImg.style.left = "0px";
+        morphImg.style.width = rect.width + "px";
+        morphImg.style.height = rect.height + "px";
+        morphImg.style.transform = `translate3d(${rect.left}px, ${rect.top}px, 0)`;
+
+        document.body.appendChild(morphImg);
+        img.style.opacity = "0";
+
+        // Activate overlay
+        overlay.classList.add("active");
+
+        // Force browser layout repaint
+        morphImg.getBoundingClientRect();
+
+        // Calculate Target Centered Scale & Dimensions
+        const maxW = window.innerWidth * 0.9;
+        const maxH = window.innerHeight * 0.85;
+        let targetW = rect.width;
+        let targetH = rect.height;
+
+        if (img.naturalWidth && img.naturalHeight) {
+          const ratio = img.naturalWidth / img.naturalHeight;
+          targetW = maxW;
+          targetH = targetW / ratio;
+          if (targetH > maxH) {
+            targetH = maxH;
+            targetW = targetH * ratio;
+          }
+        } else {
+          targetW = Math.min(rect.width * 2, maxW);
+          targetH = Math.min(rect.height * 2, maxH);
+        }
+
+        const targetTop = (window.innerHeight - targetH) / 2;
+        const targetLeft = (window.innerWidth - targetW) / 2;
+
+        // Smooth GPU Accelerated Transform to Target
+        morphImg.style.width = targetW + "px";
+        morphImg.style.height = targetH + "px";
+        morphImg.style.transform = `translate3d(${targetLeft}px, ${targetTop}px, 0)`;
+        morphImg.classList.add("expanded");
+
+        closeBtn.classList.add("active");
+
+        const handleTransitionEnd = () => {
+          morphImg.removeEventListener("transitionend", handleTransitionEnd);
+          isAnimating = false;
+        };
+        morphImg.addEventListener("transitionend", handleTransitionEnd);
+
+        morphImg.onclick = closeMorphLightbox;
+      }
+
+      function closeMorphLightbox() {
+        if (!morphImg || !activeTargetImg || isAnimating) return;
+        isAnimating = true;
+
+        closeBtn.classList.remove("active");
+        overlay.classList.remove("active");
+
+        const rect = activeTargetImg.getBoundingClientRect();
+        morphImg.classList.remove("expanded");
+        morphImg.style.width = rect.width + "px";
+        morphImg.style.height = rect.height + "px";
+        morphImg.style.transform = `translate3d(${rect.left}px, ${rect.top}px, 0)`;
+
+        const handleCloseEnd = () => {
+          morphImg.removeEventListener("transitionend", handleCloseEnd);
+          if (activeTargetImg) activeTargetImg.style.opacity = "1";
+          if (morphImg && morphImg.parentNode)
+            morphImg.parentNode.removeChild(morphImg);
+          morphImg = null;
+          activeTargetImg = null;
+          document.body.style.overflow = "";
+          document.body.style.paddingRight = "";
+          isAnimating = false;
+        };
+
+        morphImg.addEventListener("transitionend", handleCloseEnd);
+      }
+
+      closeBtn.addEventListener("click", closeMorphLightbox);
+      overlay.addEventListener("click", closeMorphLightbox);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMorphLightbox();
+      });
 
       /* ---------- Hero Ambient Particles ---------- */
       (function () {
@@ -901,13 +1140,13 @@
         const products = [];
         blocks.forEach((block) => {
           const lines = block.split("\n");
-          const item = { name: "", scent: "", price: "" };
+          const item = { name: "", info: "", price: "" };
           lines.forEach((line) => {
             const trimmed = line.trim();
             if (trimmed.toLowerCase().startsWith("name:"))
               item.name = trimmed.substring(5).trim();
-            if (trimmed.toLowerCase().startsWith("scent:"))
-              item.scent = trimmed.substring(6).trim();
+            if (trimmed.toLowerCase().startsWith("info:"))
+              item.info = trimmed.substring(6).trim();
             if (trimmed.toLowerCase().startsWith("price:"))
               item.price = trimmed.substring(6).trim();
           });
@@ -952,12 +1191,15 @@
           const waLink = `https://wa.me/${PHONE_NUMBER}?text=${waMessage}`;
           const cardHtml = `
                     <div class="perfume-card">
-                        <div class="card-banner">
+                        <div class="card-banner" onclick="openMorphLightbox(this)">
+                            <button class="expand-btn" onclick="event.stopPropagation(); openMorphLightbox(this)" aria-label="توسيع الصورة">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
                             <img src="${imgPath}" alt="${item.name}" loading="lazy" draggable="false">
                         </div>
                         <div class="card-body">
                             <div class="card-title">${item.name}</div>
-                            ${item.scent ? `<div class="card-subtitle">${item.scent}</div>` : ""}
+                            ${item.info ? `<div class="card-subtitle">${item.info}</div>` : ""}
                             ${item.price ? `<div class="card-price">${item.price}</div>` : ""}
                             <a href="${waLink}" target="_blank" class="card-action-btn">
                                 <i class="fa-brands fa-whatsapp"></i> اطلب عبر الواتساب

@@ -1,43 +1,47 @@
 window.PRODUCTS_DATA = `
 
-name: Emerald Musk
-scent: مسكي منعش - للنساء
-price: -- د.أ
----
 name: Purple Heart Diamond
-scent: زهري خشبي - للجنسين
-price: -- د.أ
----
-name: Royal Oud
-scent: شرقي عودي - للرجال
-price: -- د.أ
+info: التوت الداكن، زهرة التوبيروز، والعنبر العميق
+price: 24 د.أ
 ---
 name: Grey Pearl Diamond
-scent: ؟؟
-price: -- د.أ
+info: أخشاب الأرز المخملية، نفحات اللؤلؤ الباردة، ولمسة مسكية هادئة
+price: 24 د.أ
 ---
-name: Ibraq
-scent: ؟؟
+name: بكج ابراق topco(40)
+info: ؟؟
 price: -- د.أ
 ---
 name: Pink Diamond Sakura
-scent: ؟؟
-price: -- د.أ
+info: أزهار الكرز اليابانية (الساكورا)، زهر البرتقال، والمسك الخفيف
+price: 24 د.أ
 ---
 name: Arrogate Pink
-scent: ؟؟
-price: -- د.أ
+info: أزهار البتلات الوردية، الفانيليا، والمسك الأبيض عطر يفيض بالرقة والتألق
+price: 28 د.أ
 ---
 name: Misk
-scent: ؟؟
+info: ؟؟
 price: -- د.أ
 ---
 name: Misk Alfajr
-scent: ؟؟
+info: ؟؟
 price: -- د.أ
 ---
 name: Nude Coral Diamond
-scent: ؟؟
+info: الحمضيات الدافئة، المرجان الزهري، والعنبر المخملي
+price: 24 د.أ
+---
+name: WHITE REGENT DIAMOND
+info: افتتاحية من التين والهيل والشاي العطري، قلب من أزهار السوسن المخملية والفيتيفر، وقاعدة دافئة من حبوب التونكا والباتشولي والفانيليا
+price: 24 د.أ
+---
+name: Brazilian Tobacco
+info: افتتاحية من التبغ البرازيلي والفلفل الوردي والبرغموت، قلب من أخشاب الأرز والباتشولي، وقاعدة عميقة من الجلد (Leather) والعنبر والفانيليا
+price: -- د.أ
+---
+name: Sevillian Tobacco
+info: افتتاحية من أوراق التبغ والزعفران والهيل، قلب غني بالكاكاو والقرفة والباتشولي، وقاعدة دافئة من خشب الصندل والعنبر الذهبي والتونكا
 price: -- د.أ
 
 `;
